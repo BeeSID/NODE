@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const querystring = require('querystring');
 
-// Serve HTML pages with footer injection
 function servePage(res, filename) {
   const filePath = path.join(__dirname, 'pages', filename);
   const footerPath = path.join(__dirname, 'components', 'footer.html');
@@ -27,7 +26,6 @@ function servePage(res, filename) {
   });
 }
 
-// Serve static files (CSS, JS)
 function serveStaticFile(res, filePath) {
   const ext = path.extname(filePath);
   let contentType = 'text/plain';
@@ -47,7 +45,6 @@ function serveStaticFile(res, filePath) {
   });
 }
 
-// Create server
 const server = http.createServer((req, res) => {
   if (req.url.startsWith('/public/')) {
     const filePath = path.join(__dirname, req.url);
@@ -57,7 +54,7 @@ const server = http.createServer((req, res) => {
   if (req.method === 'POST' && req.url === '/submit-contact') {
     let body = '';
     req.on('data', chunk => {
-      body += chunk.toString(); // convert Buffer to string
+      body += chunk.toString();
     });
 
     req.on('end', () => {
@@ -97,19 +94,27 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Route handling
-  if (req.url === '/') {
-    servePage(res, 'index.html');
-  } else if (req.url === '/about') {
-    servePage(res, 'about.html');
-  } else if (req.url === '/services') {
-    servePage(res, 'services.html');
-  } else if (req.url === '/contact') {
-    servePage(res, 'contact.html');
-  } else if (req.url === '/blog') {
-    servePage(res, 'blog.html');
-  } else {
-    servePage(res, '404.html');
+  const route = req.url;
+
+  switch (route) {
+    case '/':
+      servePage(res, 'index.html');
+      break;
+    case '/about':
+      servePage(res, 'about.html');
+      break;
+    case '/services':
+      servePage(res, 'services.html');
+      break;
+    case '/contact':
+      servePage(res, 'contact.html');
+      break;
+    case '/blog':
+      servePage(res, 'blog.html');
+      break;
+    default:
+      servePage(res, '404.html');
+      break;
   }
 });
 
