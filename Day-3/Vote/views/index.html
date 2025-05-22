@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TN Assembly Voting</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Vote for Your Favorite Party</h1>
+    <form action="/vote" method="POST" id="voteForm">
+      <label class="party-option">
+        <input type="radio" name="party" value="TVK" required>
+        <span class="custom-radio"></span> TVK
+      </label>
+      <label class="party-option">
+        <input type="radio" name="party" value="NTK" required>
+        <span class="custom-radio"></span> NTK
+      </label>
+      <label class="party-option">
+        <input type="radio" name="party" value="DMK" required>
+        <span class="custom-radio"></span> DMK
+      </label>
+      <label class="party-option">
+        <input type="radio" name="party" value="ADMK" required>
+        <span class="custom-radio"></span> ADMK
+      </label>
+      <label class="party-option">
+        <input type="radio" name="party" value="BJP" required>
+        <span class="custom-radio"></span> BJP
+      </label>
+      <label class="party-option">
+        <input type="radio" name="party" value="INC" required>
+        <span class="custom-radio"></span> INC
+      </label>
+      <label class="party-option">
+        <input type="radio" name="party" value="OTHERS" required>
+        <span class="custom-radio"></span> OTHERS
+      </label>
+      <button type="submit" class="submit-btn">Submit Vote</button>
+    </form>
+    <a href="/results" class="results-link">See Live Results</a>
+  </div>
+</body>
+</html>

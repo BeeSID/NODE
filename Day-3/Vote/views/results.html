@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Voting Results</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Live Voting Results</h1>
+    <div id="resultsContainer"></div>
+    <a href="/" class="back-link">Back to Vote</a>
+  </div>
+
+  <script>
+    async function fetchResults() {
+      const res = await fetch('/results-data');
+      const data = await res.json();
+
+      const container = document.getElementById('resultsContainer');
+      container.innerHTML = '';
+
+      for (const party in data) {
+        const votes = data[party];
+        const div = document.createElement('div');
+        div.className = 'result-item';
+        div.innerHTML = `<strong>${party}</strong>: ${votes} votes`;
+        container.appendChild(div);
+      }
+    }
+
+    fetchResults();
+    setInterval(fetchResults, 5000); // refresh every 5 seconds
+  </script>
+</body>
+</html>
